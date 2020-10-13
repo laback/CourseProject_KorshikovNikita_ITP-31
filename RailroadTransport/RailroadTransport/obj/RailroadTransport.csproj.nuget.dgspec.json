@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Учёба\\РПБДИС\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj": {}
+    "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj": {}
   },
   "projects": {
-    "D:\\Учёба\\РПБДИС\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj": {
+    "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Учёба\\РПБДИС\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
+        "projectUniqueName": "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
         "projectName": "RailroadTransport",
-        "projectPath": "D:\\Учёба\\РПБДИС\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
+        "projectPath": "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
         "packagesPath": "C:\\Users\\korsh\\.nuget\\packages\\",
-        "outputPath": "D:\\Учёба\\РПБДИС\\Курсач\\RailroadTransport\\RailroadTransport\\obj\\",
+        "outputPath": "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\korsh\\AppData\\Roaming\\NuGet\\NuGet.Config",

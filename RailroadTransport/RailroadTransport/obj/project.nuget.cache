@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c8dX+bCc5olXgTP6dwlRPZaLa6St27ug2LicmEbi6bqBRXKLkiB713vbeViEbUe7O6dKEV34cKYkt2hFj1PGLg==",
+  "dgSpecHash": "99l+Ajl1Cu7u5jxNExzFYRqJRpxPUiU79hxXYWhBFqhOq1p3rN78uKt8OP3Gjc17UYEkKaXf8Z0IT11x9bh4OQ==",
   "success": true,
-  "projectFilePath": "D:\\Учёба\\РПБДИС\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
+  "projectFilePath": "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\korsh\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\korsh\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
