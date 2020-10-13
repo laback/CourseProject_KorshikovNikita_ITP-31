@@ -1,0 +1,24 @@
+﻿@model IEnumerable<RailroadTransport.Models.Train>
+
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <div>
+        <h3>Распродажа книг</h3>
+        <table>
+            <tr class="header">
+                <td><p>Название поезда</p></td>
+                <td><p>Тип поезда</p></td>
+                <td><p>Фирменный ли</p></td>
+                <td></td>
+            </tr>
+           @foreach (var t in Model)
+            {
+                <tr>
+                    <td><p>@t.TrainId.</p></td>
+                    <td><p>@t.Type.NameOfType</p></td>
+                    <td><p>@t.IsFirm</p></td>
+                </tr>
+            }
+        </table>
+    </div>

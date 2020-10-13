@@ -1,0 +1,30 @@
+﻿@model IEnumerable<RailroadTransport.Models.Schedule>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h3></h3>
+    <table>
+        <tr class="header">
+            <td><p>Номер списка расписания</p></td>
+            <td><p>Номер поезда</p></td>
+            <td><p>День недели</p></td>
+            <td><p>Название пункта отправления</p></td>
+            <td><p>Название пункта прибытия</p></td>
+            <td><p>Расстояние</p></td>
+            <td></td>
+        </tr>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td><p>@s.ScheduleId</p></td>
+                <td><p>@s.TraindId</p></td>
+                <td><p>@s.Day</p></td>
+                <td><p>@s.BeginStop.NameOfStop</p></td>
+                <td><p>@s.EndStop.NameOfStop</p></td>
+                <td><p>@s.Distance</p></td>
+            </tr>
+        }
+    </table>
+</div>

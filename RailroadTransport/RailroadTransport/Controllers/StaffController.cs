@@ -15,7 +15,7 @@ namespace RailroadTransport.Controllers
         {
             this.rc = rc;
         }
-        public IActionResult Index()
+        public IActionResult ShowTable()
         {
             var result = rc.Staffs.Include(p => p.Post).Take(20);
             return View(result);

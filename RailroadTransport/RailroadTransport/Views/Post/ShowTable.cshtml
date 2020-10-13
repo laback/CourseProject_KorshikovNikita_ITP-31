@@ -1,0 +1,22 @@
+﻿@model IEnumerable<RailroadTransport.Models.Post>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h3>Распродажа книг</h3>
+    <table>
+        <tr class="header">
+            <td><p>Название должности</p></td>
+            <td><p>Номер должности</p></td>
+            <td></td>
+        </tr>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td><p>@p.PostId</p></td>
+                <td><p>@p.NameOfPost</p></td>
+            </tr>
+        }
+    </table>
+</div>

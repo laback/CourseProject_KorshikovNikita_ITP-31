@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RailroadTransport.Data;
 
 namespace RailroadTransport.Controllers
@@ -16,7 +17,7 @@ namespace RailroadTransport.Controllers
         }
         public IActionResult ShowTable()
         {
-            var trains = rc.Trains;
+            var trains = rc.Trains.Include(t => t.Type);
             return View(trains);
         }
     }
