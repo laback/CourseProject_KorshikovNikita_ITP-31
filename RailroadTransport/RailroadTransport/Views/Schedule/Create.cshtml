@@ -1,0 +1,43 @@
+﻿@model RailroadTransport.Models.Schedule
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Добавление</h2>
+
+<form asp-action="Create">
+    <input type="hidden" asp-for="ScheduleId" />
+    <div class="form-group">
+        <div class="form-group">
+            <label asp-for="TrainId" class="control-label"></label>
+            <select asp-for="TrainId" class="form-control" asp-items="ViewBag.TrainId"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Day" class="control-label"></label>
+            <input asp-for="Day" class="form-control" />
+            <span asp-validation-for="Day" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="BeginStopId" class="control-label"></label>
+            <select asp-for="BeginStopId" class="form-control" asp-items="ViewBag.BeginStopId"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="EndStopId" class="control-label"></label>
+            <select asp-for="EndStopId" class="form-control" asp-items="ViewBag.EndStopId"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Distance" class="control-label"></label>
+            <input asp-for="Distance" class="form-control" />
+            <span asp-validation-for="Distance" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TimeOfArrive" class="control-label"></label>
+            <input asp-for="TimeOfArrive" class="form-control" />
+            <span asp-validation-for="TimeOfArrive" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Добавить" class="btn btn-default" />
+        </div>
+    </div>
+</form>

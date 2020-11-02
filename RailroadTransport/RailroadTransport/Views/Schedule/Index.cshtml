@@ -1,0 +1,59 @@
+﻿@model RailroadTransport.ViewModels.IndexViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Расписание</h2>
+
+<p><a asp-action="Create">Добавить</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().ScheduleId)</th>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().TrainId)</th>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().Day)</th>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().BeginStop.NameOfStop)</th>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().EndStop.NameOfStop)</th>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().Distance)</th>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().TimeOfArrive)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Schedules)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ScheduleId)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrainId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Day)</td>
+                <td>@Html.DisplayFor(modelItem => item.BeginStop.NameOfStop)</td>
+                <td>@Html.DisplayFor(modelItem => item.EndStop.NameOfStop)</td>
+                <td>@Html.DisplayFor(modelItem => item.Distance)</td>
+                <td>@Html.DisplayFor(modelItem => item.TimeOfArrive)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ScheduleId">Редактировать</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ScheduleId">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

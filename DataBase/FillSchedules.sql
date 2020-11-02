@@ -1,7 +1,7 @@
 use Course1
 go
 
-alter proc FillSchedules
+create proc FillSchedules
 	as
 		declare @mintrain int, @maxtrain int, @minstop int, @maxstop int, @count int, @randtrain int, @randbegin int, @randday varchar(2), @days varchar(7) = 'обявояа', @pos int, @randend int, @randdistance float, @randtime time
 		set @count = 20000

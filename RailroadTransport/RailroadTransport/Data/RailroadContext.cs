@@ -39,7 +39,7 @@ namespace RailroadTransport.Data
 
                 entity.Property(e => e.TimeOfArrive).HasColumnName("timeOfArrive");
 
-                entity.Property(e => e.TraindId).HasColumnName("trainId");
+                entity.Property(e => e.TrainId).HasColumnName("trainId");
 
                 entity.HasOne(d => d.BeginStop)
                     .WithMany(p => p.ScheduleBeginStop)
@@ -52,8 +52,8 @@ namespace RailroadTransport.Data
                     .HasConstraintName("FK__Schedules__endSt__32E0915F");
 
                 entity.HasOne(d => d.Train)
-                    .WithMany(p => p.Schedule)
-                    .HasForeignKey(d => d.TraindId)
+                    .WithMany(p => p.Schedules)
+                    .HasForeignKey(d => d.TrainId)
                     .HasConstraintName("FK__Schedules__train__30F848ED");
             });
         }

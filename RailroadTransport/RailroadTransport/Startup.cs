@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RailroadTransport.Data;
+using RailroadTransport.Middleware;
 
 namespace RailroadTransport
 {
@@ -47,13 +48,15 @@ namespace RailroadTransport
 
             app.UseRouting();
 
+            app.UseCacheMiddleware();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Post}/{action=ShowTable}/{id?}");
+                    pattern: "{controller=Post}/{action=Index}/{id?}");
             });
         }
     }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,15 +9,21 @@ namespace RailroadTransport.Models
     public class Schedule
     {
         [Key]
+        [Display(Name = "Номер строки расписания")]
         public int ScheduleId { get; set; }
-        public int TraindId { get; set; }
+        [Display(Name = "Номер поезда")]
+        public int TrainId { get; set; }
+        [Display(Name = "День отправления")]
         public string Day { get; set; }
+        [Display(Name = "Номер начальной остановки")]
         public int BeginStopId { get; set; }
+        [Display(Name = "Номер конечной остановки")]
         public int EndStopId { get; set; }
+        [Display(Name = "Расстояние маршрута")]
         public double Distance { get; set; }
         public TimeSpan TimeOfArrive { get; set; }
         public Train Train { get; set; }
-        public virtual Stop BeginStop { get; set; }
-        public virtual Stop EndStop { get; set; }
+        public Stop BeginStop { get; set; }
+        public Stop EndStop { get; set; }
     }
 }

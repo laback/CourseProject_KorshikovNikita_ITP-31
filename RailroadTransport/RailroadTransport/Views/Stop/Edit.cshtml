@@ -1,0 +1,17 @@
+﻿@model RailroadTransport.Models.Stop
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редактировать</h2>
+<form action="edit" method="post">
+    <input type="hidden" asp-for="StopId" />
+    <div class="form-group">
+        <label asp-for="NameOfStop" class="control-label"></label>
+        <input asp-for="NameOfStop" class="form-control" name="NameOfStop" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-default" />
+    </div>
+</form>

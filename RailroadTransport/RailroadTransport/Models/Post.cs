@@ -9,8 +9,10 @@ namespace RailroadTransport.Models
     public class Post
     {
         [Key]
+        [Display(Name = "Код должности")]
         public int PostId { get; set; }
+        [Display(Name = "Название должности")]
         public string NameOfPost { get; set; }
-        public ICollection<Staff> Staff { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }

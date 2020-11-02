@@ -9,11 +9,14 @@ namespace RailroadTransport.Models
     public class Train
     {
         [Key]
+        [Display(Name = "Код поезда")]
         public int TrainId { get; set; }
+        [Display(Name = "Код типа поезда")]
         public int TypeId { get; set; }
+        [Display(Name = "Фирменный ли поезд")]
         public bool IsFirm { get; set; }
         public Type Type { get; set; }
-        public ICollection<Staff> Staff { get; set; }
-        public ICollection<Schedule> Schedule { get; set; }
+        public ICollection<Schedule> Schedules { get; set; }
+        public ICollection<Staff> Staffs { get; set; }
     }
 }

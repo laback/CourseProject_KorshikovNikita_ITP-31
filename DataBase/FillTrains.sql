@@ -1,4 +1,4 @@
-use Course
+use Course1
 go
 
 create procedure FillTrains as
