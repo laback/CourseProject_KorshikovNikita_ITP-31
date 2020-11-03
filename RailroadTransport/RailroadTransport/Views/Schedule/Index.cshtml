@@ -1,4 +1,4 @@
-﻿@model RailroadTransport.ViewModels.IndexViewModel
+﻿@model RailroadTransport.ViewModels.ScheduleViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <h2>Расписание</h2>
 
-<p><a asp-action="Create">Добавить</a></p>
+<p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
 
 <table class="table">
     <thead>
@@ -32,8 +32,8 @@
                 <td>@Html.DisplayFor(modelItem => item.Distance)</td>
                 <td>@Html.DisplayFor(modelItem => item.TimeOfArrive)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ScheduleId">Редактировать</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ScheduleId">Удалить</a>
+                    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.ScheduleId">Редактировать</a> |
+                    <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.ScheduleId">Удалить</a>
                 </td>
             </tr>
         }

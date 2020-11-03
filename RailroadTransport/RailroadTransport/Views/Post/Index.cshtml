@@ -1,4 +1,4 @@
-﻿@model RailroadTransport.ViewModels.IndexViewModel
+﻿@model RailroadTransport.ViewModels.PostViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,8 +7,8 @@
 
 <h2>Должности</h2>
 
-<p><a asp-action="Create">Добавить</a></p>
-<p><a asp-action="ClearCookies">Очистить фильтр</a></p>
+<p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
+<p><a class="btn btn-outline-dark" asp-action="ClearCache">Очистить фильтр</a></p>
 @using (Html.BeginForm("Index", "Post", FormMethod.Get))
 {
     <fieldset>
@@ -33,8 +33,8 @@
                 <td>@Html.DisplayFor(modelItem => item.PostId)</td>
                 <td>@Html.DisplayFor(modelItem => item.NameOfPost)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.PostId">Редактировать</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PostId">Удалить</a>
+                    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.PostId">Редактировать</a> |
+                    <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.PostId">Удалить</a>
                 </td>
             </tr>
         }

@@ -25,7 +25,7 @@ namespace RailroadTransport.Controllers
             int count = trains.Count();
             trains = trains.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel
+            TrainViewModel viewModel = new TrainViewModel
             {
                 PageViewModel = pageViewModel,
                 Trains = trains,

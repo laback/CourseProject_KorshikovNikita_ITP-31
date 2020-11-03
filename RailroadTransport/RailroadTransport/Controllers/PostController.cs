@@ -24,28 +24,29 @@ namespace RailroadTransport.Controllers
         }
         public IActionResult Index(string NameOfPost, SortState sortState, int page = 1)
         {
-            if(NameOfPost != null)
+            PostViewModel viewModel;
+            if (!cache.TryGetValue("postViewModel", out viewModel))
             {
-                HttpContext.Response.Cookies.Append("nameOfPost", NameOfPost);
+                viewModel = SetViewModel(NameOfPost, sortState, page);
+                cache.Set("postViewModel", viewModel);
             }
-            IEnumerable<Post> posts = railroadContext.Posts;
-            posts = SortSearch(posts, sortState, NameOfPost ?? "");
-            int pageSize = 10;
-            int count = posts.Count();
-            posts = posts.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel();
-            if(!cache.TryGetValue("post", out viewModel))
+            else
             {
-                viewModel = new IndexViewModel
+                if(viewModel.NameOfPost == null)
                 {
-                    PageViewModel = pageViewModel,
-                    Posts = posts,
-                    SortViewModel = new SortViewModel(sortState),
-                    NameOfPost = NameOfPost
-                };
-            if(!String.IsNullOrEmpty(NameOfPost))
-                cache.Set("post", viewModel);
+                    viewModel = SetViewModel(NameOfPost ?? viewModel.NameOfPost, sortState, page);
+                    cache.Set("postViewModel", viewModel);
+                }
+                if (viewModel.NameOfPost != NameOfPost)
+                {
+                    viewModel = SetViewModel(NameOfPost ?? viewModel.NameOfPost, sortState, page);
+                    cache.Set("postViewModel", viewModel);
+                }
+                if (viewModel.NameOfPost == NameOfPost)
+                {
+                    viewModel = SetViewModel(NameOfPost ?? viewModel.NameOfPost, sortState, page);
+                    cache.Set("postViewModel", viewModel);
+                }
             }
             return View(viewModel);
         }
@@ -107,11 +108,27 @@ namespace RailroadTransport.Controllers
             posts = posts.Where(n => n.NameOfPost.Contains(NameOfPost ?? ""));
             return posts;
         }
-        public IActionResult ClearCookies()
+        public IActionResult ClearCache()
         {
-            HttpContext.Response.Cookies.Delete("nameOfPost");
-            cache.Remove("post");
+            cache.Remove("postViewModel");
             return RedirectToAction("Index");
+        }
+        private PostViewModel SetViewModel(string NameOfPost, SortState sortState, int page = 1)
+        {
+            IEnumerable<Post> posts = railroadContext.Posts;
+            posts = SortSearch(posts, sortState, NameOfPost ?? "");
+            int pageSize = 10;
+            int count = posts.Count();
+            posts = posts.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            PostViewModel viewModel = new PostViewModel
+            {
+                Posts = posts,
+                PageViewModel = pageViewModel,
+                NameOfPost = NameOfPost,
+                SortViewModel = new SortViewModel(sortState)
+            };
+            return viewModel;
         }
     }
 }

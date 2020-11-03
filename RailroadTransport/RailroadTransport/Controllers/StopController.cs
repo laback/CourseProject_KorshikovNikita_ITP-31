@@ -21,28 +21,29 @@ namespace RailroadTransport.Controllers
         }
         public IActionResult Index(string NameOfStop, SortState sortState, int page = 1)
         {
-            if (NameOfStop != null)
+            StopViewModel viewModel;
+            if (!cache.TryGetValue("stopViewModel", out viewModel))
             {
-                HttpContext.Response.Cookies.Append("nameOfStop", NameOfStop);
+                viewModel = SetViewModel(NameOfStop, sortState, page);
+                cache.Set("stopViewModel", viewModel);
             }
-            IEnumerable<Stop> stops = railroadContext.Stops;
-            stops = SortSearch(stops, sortState, NameOfStop ?? "");
-            int pageSize = 10;
-            int count = stops.Count();
-            stops = stops.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel();
-            if (!cache.TryGetValue("post", out viewModel))
+            else
             {
-                viewModel = new IndexViewModel
+                if (viewModel.NameOfStop == null)
                 {
-                    PageViewModel = pageViewModel,
-                    Stops = stops,
-                    SortViewModel = new SortViewModel(sortState),
-                    NameOfPost = NameOfStop
-                };
-                if (!String.IsNullOrEmpty(NameOfStop))
-                    cache.Set("stop", viewModel);
+                    viewModel = SetViewModel(NameOfStop ?? viewModel.NameOfStop, sortState, page);
+                    cache.Set("stopViewModel", viewModel);
+                }
+                if (viewModel.NameOfStop == NameOfStop)
+                {
+                    viewModel = SetViewModel(NameOfStop ?? viewModel.NameOfStop, sortState, page);
+                    cache.Set("stopViewModel", viewModel);
+                }
+                if(viewModel.NameOfStop != NameOfStop)
+                {
+                    viewModel = SetViewModel(NameOfStop ?? viewModel.NameOfStop, sortState, page);
+                    cache.Set("stopViewModel", viewModel);
+                }
             }
             return View(viewModel);
         }
@@ -94,6 +95,7 @@ namespace RailroadTransport.Controllers
         }
         public IEnumerable<Stop> SortSearch(IEnumerable<Stop> stops, SortState sortState, string NameOfStop)
         {
+            stops = stops.Where(n => n.NameOfStop.Contains(NameOfStop ?? ""));
             switch (sortState)
             {
                 case SortState.NameOfStopAcs:
@@ -103,14 +105,29 @@ namespace RailroadTransport.Controllers
                     stops = stops.OrderByDescending(n => n.NameOfStop);
                     break;
             }
-            stops = stops.Where(n => n.NameOfStop.Contains(NameOfStop ?? ""));
             return stops;
         }
-        public IActionResult ClearCookies()
+        public IActionResult ClearCache()
         {
-            HttpContext.Response.Cookies.Delete("nameOfStop");
-            cache.Remove("stop");
+            cache.Remove("stopViewModel");
             return RedirectToAction("Index");
+        }
+        private StopViewModel SetViewModel(string NameOfStop, SortState sortState, int page = 1)
+        {
+            IEnumerable<Stop> stops = railroadContext.Stops;
+            stops = SortSearch(stops, sortState, NameOfStop ?? "");
+            int pageSize = 10;
+            int count = stops.Count();
+            stops = stops.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            StopViewModel viewModel = new StopViewModel
+            {
+                Stops = stops,
+                PageViewModel = pageViewModel,
+                NameOfStop = NameOfStop,
+                SortViewModel = new SortViewModel(sortState)
+            };
+            return viewModel;
         }
     }
 }

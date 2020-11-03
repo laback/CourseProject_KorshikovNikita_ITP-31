@@ -1,22 +1,53 @@
-﻿@model RailroadTransport.ViewModels.IndexViewModel
+﻿@model RailroadTransport.ViewModels.StaffViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string FIO = Model.FIO;
+    string NameOfPost = Model.NameOfPost;
+    int Age = Model.Age;
+    int WorkExp = Model.WorkExp;
 }
 
 <h2>Сотрудники</h2>
 
-<p><a asp-action="Create">Добавить</a></p>
+<p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
+<p><a class="btn btn-outline-dark" asp-action="ClearCache">Очисть фильтр</a></p>
+@using (Html.BeginForm("Index", "Staff", FormMethod.Get))
+{
+    <fieldset>
+        ФИО сотрудника: @Html.TextBox("FIO", @FIO)
+        Наименование должности: @Html.TextBox("NameOfPost", @NameOfPost)
+        Возраст сотрудника: @Html.TextBox("Age", @Age)
+        <br><br>Стаж работы сотрудника: @Html.TextBox("WorkExp", @WorkExp)
+        <input type="submit" value="Найти" />
+    </fieldset>
+}
 
 <table class="table">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().StaffId)</th>
-            <th>@Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().FIO)</th>
+            <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.FIOSort asp-route-FIO="@FIO">
+                    @Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().FIO)
+                </a>
+            </th>
             <th>@Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().TrainId)</th>
-            <th>@Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().Post.NameOfPost)</th>
-            <th>@Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().Age)</th>
-            <th>@Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().WorkExp)</th>
+            <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.NameOfPostSort asp-route-NameOfPost="@NameOfPost">
+                    @Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().Post.NameOfPost)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.AgeSort asp-route-Age="@Age">
+                    @Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().Age)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.WorkExpSort asp-route-WorkExp="@WorkExp">
+                    @Html.DisplayNameFor(model => model.Staffs.FirstOrDefault().WorkExp)
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -30,8 +61,8 @@
                 <td>@Html.DisplayFor(modelItem => item.Age)</td>
                 <td>@Html.DisplayFor(modelItem => item.WorkExp)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.StaffId">Редактировать</a> |
-                    <a asp-action="Delete" asp-route-id="@item.StaffId">Удалить</a>
+                    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.StaffId">Редактировать</a> |
+                    <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.StaffId">Удалить</a>
                 </td>
             </tr>
         }

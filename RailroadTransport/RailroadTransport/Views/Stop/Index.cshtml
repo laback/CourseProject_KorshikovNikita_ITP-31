@@ -1,14 +1,14 @@
-﻿@model RailroadTransport.ViewModels.IndexViewModel
+﻿@model RailroadTransport.ViewModels.StopViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string nameOfPost = Model.NameOfStop;
+    string nameOfStop = Model.NameOfStop;
 }
 
 <h2>Остановки</h2>
 
-<p><a asp-action="Create">Добавить</a></p>
-<p><a asp-action="ClearCookies">Очистить фильтр</a></p>
+<p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
+<p><a class="btn btn-outline-dark" asp-action="ClearCache">Очистить фильтр</a></p>
 @using (Html.BeginForm("Index", "Stop", FormMethod.Get))
 {
     <fieldset>
@@ -21,7 +21,7 @@
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Stops.FirstOrDefault().StopId)</th>
-            <th><a asp-action="Index" asp-route-sortState=@Model.SortViewModel.NameOfStopSort asp-route-NameOfPost="@nameOfPost">
+            <th><a asp-action="Index" asp-route-sortState=@Model.SortViewModel.NameOfStopSort asp-route-NameOfStop="@nameOfStop">
                 @Html.DisplayNameFor(model => model.Stops.FirstOrDefault().NameOfStop)</a>
             </th>
         </tr>
@@ -33,8 +33,8 @@
                 <td>@Html.DisplayFor(modelItem => item.StopId)</td>
                 <td>@Html.DisplayFor(modelItem => item.NameOfStop)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.StopId">Редактировать</a> |
-                    <a asp-action="Delete" asp-route-id="@item.StopId">Удалить</a>
+                    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.StopId">Редактировать</a> |
+                    <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.StopId">Удалить</a>
                 </td>
             </tr>
         }

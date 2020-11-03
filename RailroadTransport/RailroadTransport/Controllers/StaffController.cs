@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Caching.Memory;
 using RailroadTransport.Data;
 using RailroadTransport.Models;
 using RailroadTransport.ViewModels;
@@ -15,22 +16,37 @@ namespace RailroadTransport.Controllers
     public class StaffController : Controller
     {
         private RailroadContext railroadContext;
-        public StaffController(RailroadContext rc)
+        private IMemoryCache cache;
+        public StaffController(RailroadContext rc, IMemoryCache cache)
         {
             railroadContext = rc;
+            this.cache = cache;
         }
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(SortState sortState, string FIO, string NameOfPost, int Age, int WorkExp, int page = 1)
         {
-            IEnumerable<Staff> staffs = railroadContext.Staffs.Include(p => p.Post).Include(t => t.Train).OrderBy(s => s.StaffId);
-            int pageSize = 20;
-            int count = staffs.Count();
-            staffs = staffs.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel
+            StaffViewModel viewModel;
+            if (!cache.TryGetValue("staffViewModel", out viewModel))
             {
-                PageViewModel = pageViewModel,
-                Staffs = staffs,
-            };
+                viewModel = SetViewModel(FIO, NameOfPost, Age, WorkExp, sortState, page);
+                cache.Set("staffViewModel", viewModel);
+            }
+            else
+            {
+                if (viewModel.NameOfPost == NameOfPost || viewModel.FIO == FIO || viewModel.Age == Age || viewModel.WorkExp == WorkExp)
+                {
+                    if (Age > 0)
+                        viewModel.Age = Age;
+                    if (WorkExp > 0)
+                        viewModel.WorkExp = WorkExp;
+                    viewModel = SetViewModel(FIO ?? viewModel.FIO, NameOfPost ?? viewModel.NameOfPost, viewModel.Age, viewModel.WorkExp, sortState, page);
+                    cache.Set("staffViewModel", viewModel);
+                }
+               if (viewModel.NameOfPost != NameOfPost && viewModel.FIO != FIO && viewModel.Age != Age && viewModel.WorkExp != WorkExp)
+                {
+                    viewModel = SetViewModel(FIO ?? viewModel.FIO, NameOfPost ?? viewModel.NameOfPost, Age, WorkExp, sortState, page);
+                    cache.Set("staffViewModel", viewModel);
+                }
+            }
             return View(viewModel);
         }
         [HttpGet]
@@ -108,7 +124,37 @@ namespace RailroadTransport.Controllers
                     staffs = staffs.OrderByDescending(n => n.Post.NameOfPost);
                     break;
             }
-            staffs = staffs.Where(a => a.Age );
+            staffs = staffs.Where(f => f.FIO.Contains(FIO ?? "")).Where(n => n.Post.NameOfPost.Contains(NameOfPost ?? "")); 
+            if (Age > 0)
+                staffs = staffs.Where(a => a.Age == Age);
+            if (WorkExp > 0)
+                staffs = staffs.Where(w => w.WorkExp == WorkExp);
+            return staffs;
+        }
+        public IActionResult ClearCache()
+        {
+            cache.Remove("staffViewModel");
+            return RedirectToAction("Index");
+        }
+        private StaffViewModel SetViewModel(string FIO, string NameOfPost, int Age, int WorkExp, SortState sortState, int page = 1)
+        {
+            IEnumerable<Staff> staffs = railroadContext.Staffs.Include(p => p.Post);
+            staffs = SortSearch(staffs, Age, WorkExp, FIO ?? "", NameOfPost ?? "", sortState);
+            int pageSize = 20;
+            int count = staffs.Count();
+            staffs = staffs.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            StaffViewModel viewModel = new StaffViewModel
+            {
+                Staffs = staffs,
+                PageViewModel = pageViewModel,
+                NameOfPost = NameOfPost,
+                FIO = FIO,
+                Age = Age,
+                WorkExp = WorkExp,
+                SortViewModel = new SortViewModel(sortState)
+            };
+            return viewModel;
         }
     }
 }

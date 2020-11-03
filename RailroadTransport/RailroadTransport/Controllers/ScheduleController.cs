@@ -25,7 +25,7 @@ namespace RailroadTransport.Controllers
             int count = schedules.Count();
             schedules = schedules.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel
+            ScheduleViewModel viewModel = new ScheduleViewModel
             {
                 PageViewModel = pageViewModel,
                 Schedules = schedules,
