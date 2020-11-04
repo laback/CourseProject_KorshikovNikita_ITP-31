@@ -11,5 +11,6 @@ namespace RailroadTransport.ViewModels
         public IEnumerable<Train> Trains { get; set; }
         public PageViewModel PageViewModel { get; set; }
         public SortViewModel SortViewModel { get; set; }
+        public string NameOfType { get; set; }
     }
 }

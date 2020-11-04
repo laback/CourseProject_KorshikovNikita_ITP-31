@@ -6,7 +6,7 @@
 
 <h2>Типы поездов</h2>
 
-<p><a asp-action="Create">Добавить</a></p>
+<p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
 
 <table class="table">
     <thead>
@@ -22,8 +22,8 @@
                 <td>@Html.DisplayFor(modelItem => item.TypeId)</td>
                 <td>@Html.DisplayFor(modelItem => item.NameOfType)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.TypeId">Редактировать</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TypeId">Удалить</a>
+                    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.TypeId">Редактировать</a> |
+                    <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.TypeId">Удалить</a>
                 </td>
             </tr>
         }

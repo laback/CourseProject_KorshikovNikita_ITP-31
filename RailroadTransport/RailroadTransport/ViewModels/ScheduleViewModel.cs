@@ -11,5 +11,7 @@ namespace RailroadTransport.ViewModels
         public IEnumerable<Schedule> Schedules { get; set; }
         public PageViewModel PageViewModel { get; set; }
         public SortViewModel SortViewModel { get; set; }
+        public string NameOfBeginStop { get; set; }
+        public string NameOfEndStop { get; set; }
     }
 }

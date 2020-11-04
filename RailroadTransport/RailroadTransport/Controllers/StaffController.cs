@@ -32,20 +32,12 @@ namespace RailroadTransport.Controllers
             }
             else
             {
-                if (viewModel.NameOfPost == NameOfPost || viewModel.FIO == FIO || viewModel.Age == Age || viewModel.WorkExp == WorkExp)
-                {
-                    if (Age > 0)
-                        viewModel.Age = Age;
-                    if (WorkExp > 0)
-                        viewModel.WorkExp = WorkExp;
-                    viewModel = SetViewModel(FIO ?? viewModel.FIO, NameOfPost ?? viewModel.NameOfPost, viewModel.Age, viewModel.WorkExp, sortState, page);
-                    cache.Set("staffViewModel", viewModel);
-                }
-               if (viewModel.NameOfPost != NameOfPost && viewModel.FIO != FIO && viewModel.Age != Age && viewModel.WorkExp != WorkExp)
-                {
-                    viewModel = SetViewModel(FIO ?? viewModel.FIO, NameOfPost ?? viewModel.NameOfPost, Age, WorkExp, sortState, page);
-                    cache.Set("staffViewModel", viewModel);
-                }
+                if (Age > 0)
+                    viewModel.Age = Age;
+                if (WorkExp > 0)
+                    viewModel.WorkExp = WorkExp;
+                viewModel = SetViewModel(FIO ?? viewModel.FIO, NameOfPost ?? viewModel.NameOfPost, viewModel.Age, viewModel.WorkExp, sortState, page);
+                cache.Set("staffViewModel", viewModel);
             }
             return View(viewModel);
         }

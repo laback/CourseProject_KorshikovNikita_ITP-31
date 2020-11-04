@@ -21,6 +21,8 @@ namespace RailroadTransport.Models
         public int EndStopId { get; set; }
         [Display(Name = "Расстояние маршрута")]
         public double Distance { get; set; }
+        [Display(Name = "Время прибытия")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan TimeOfArrive { get; set; }
         public Train Train { get; set; }
         public Stop BeginStop { get; set; }

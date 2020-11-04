@@ -29,21 +29,8 @@ namespace RailroadTransport.Controllers
             }
             else
             {
-                if (viewModel.NameOfStop == null)
-                {
-                    viewModel = SetViewModel(NameOfStop ?? viewModel.NameOfStop, sortState, page);
-                    cache.Set("stopViewModel", viewModel);
-                }
-                if (viewModel.NameOfStop == NameOfStop)
-                {
-                    viewModel = SetViewModel(NameOfStop ?? viewModel.NameOfStop, sortState, page);
-                    cache.Set("stopViewModel", viewModel);
-                }
-                if(viewModel.NameOfStop != NameOfStop)
-                {
-                    viewModel = SetViewModel(NameOfStop ?? viewModel.NameOfStop, sortState, page);
-                    cache.Set("stopViewModel", viewModel);
-                }
+                viewModel = SetViewModel(NameOfStop ?? viewModel.NameOfStop, sortState, page);
+                cache.Set("stopViewModel", viewModel);
             }
             return View(viewModel);
         }

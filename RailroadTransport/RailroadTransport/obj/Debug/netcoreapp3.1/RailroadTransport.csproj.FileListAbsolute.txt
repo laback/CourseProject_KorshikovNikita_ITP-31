@@ -174,3 +174,5 @@ D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\Rai
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\Razor\Views\Schedule\Create.cshtml.g.cs
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\Razor\Views\Schedule\Edit.cshtml.g.cs
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\Razor\Views\Schedule\Delete.cshtml.g.cs
+D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\Razor\Views\Train\Delete.cshtml.g.cs
+D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\Razor\Views\Train\Edit.cshtml.g.cs
