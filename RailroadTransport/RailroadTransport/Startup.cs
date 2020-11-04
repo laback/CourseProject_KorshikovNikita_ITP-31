@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RailroadTransport.Data;
 using RailroadTransport.Middleware;
+using RailroadTransport.Models;
 
 namespace RailroadTransport
 {
@@ -27,7 +29,19 @@ namespace RailroadTransport
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<RailroadContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<UserIdentityContext>(options => options.UseSqlServer(connection));
+            services.AddIdentity<User, IdentityRole>(opts =>
+            {
+                opts.Password.RequiredLength = 5; 
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            })
+                .AddEntityFrameworkStores<UserIdentityContext>();
+
+            string connection1 = Configuration.GetConnectionString("SqlServerConnection");
+            services.AddDbContext<RailroadContext>(options => options.UseSqlServer(connection1));
 
             services.AddControllersWithViews();
         }
@@ -51,12 +65,13 @@ namespace RailroadTransport
             app.UseCacheMiddleware();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Post}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

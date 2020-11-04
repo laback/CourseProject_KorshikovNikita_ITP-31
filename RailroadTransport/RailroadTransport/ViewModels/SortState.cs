@@ -38,7 +38,7 @@ namespace RailroadTransport.ViewModels
             AgeSort = sortState == SortState.AgeAcs ? SortState.AgeDecs : SortState.AgeAcs;
             WorkExpSort = sortState == SortState.WorkExpAcs ? SortState.WorkExpDecs : SortState.WorkExpAcs;
             NameOfTypeSort = sortState == SortState.NameOfTypeAcs ? SortState.NameOfTypeDecs : SortState.NameOfTypeAcs;
-            
+
             CurrentState = sortState;
         }
     }
