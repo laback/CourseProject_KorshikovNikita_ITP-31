@@ -13,5 +13,10 @@ namespace RailroadTransport.ViewModels
         public SortViewModel SortViewModel { get; set; }
         public string NameOfBeginStop { get; set; }
         public string NameOfEndStop { get; set; }
+        public string Stop { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+        public int CountOfTrains { get; set; }
+        public int CountOfStops { get; set; }
     }
 }

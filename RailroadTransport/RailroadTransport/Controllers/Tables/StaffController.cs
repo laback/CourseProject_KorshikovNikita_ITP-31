@@ -22,22 +22,30 @@ namespace RailroadTransport.Controllers
             railroadContext = rc;
             this.cache = cache;
         }
-        public IActionResult Index(SortState sortState, string FIO, string NameOfPost, int Age, int WorkExp, int page = 1)
+        public IActionResult Index(SortState sortState, string FIO, string NameOfPost, int Age, int WorkExp, bool IsMachinist, int page = 1)
         {
             StaffViewModel viewModel;
-            if (!cache.TryGetValue("staffViewModel", out viewModel))
+            if (IsMachinist)
             {
-                viewModel = SetViewModel(FIO, NameOfPost, Age, WorkExp, sortState, page);
+                viewModel = SetViewModel(FIO, "Машинист", Age, WorkExp, sortState, page);
                 cache.Set("staffViewModel", viewModel);
             }
             else
             {
-                if (Age > 0)
-                    viewModel.Age = Age;
-                if (WorkExp > 0)
-                    viewModel.WorkExp = WorkExp;
-                viewModel = SetViewModel(FIO ?? viewModel.FIO, NameOfPost ?? viewModel.NameOfPost, viewModel.Age, viewModel.WorkExp, sortState, page);
-                cache.Set("staffViewModel", viewModel);
+                if (!cache.TryGetValue("staffViewModel", out viewModel))
+                {
+                    viewModel = SetViewModel(FIO, NameOfPost, Age, WorkExp, sortState, page);
+                    cache.Set("staffViewModel", viewModel);
+                }
+                else
+                {
+                    if (Age > 0)
+                        viewModel.Age = Age;
+                    if (WorkExp > 0)
+                        viewModel.WorkExp = WorkExp;
+                    viewModel = SetViewModel(FIO ?? viewModel.FIO, NameOfPost ?? viewModel.NameOfPost, viewModel.Age, viewModel.WorkExp, sortState, page);
+                    cache.Set("staffViewModel", viewModel);
+                }
             }
             return View(viewModel);
         }
@@ -89,7 +97,7 @@ namespace RailroadTransport.Controllers
         }
         public IEnumerable<Staff> SortSearch(IEnumerable<Staff> staffs, int Age, int WorkExp, string FIO, string NameOfPost, SortState sortState)
         {
-            switch(sortState)
+            switch (sortState)
             {
                 case SortState.AgeAcs:
                     staffs = staffs.OrderBy(a => a.Age);
@@ -116,11 +124,12 @@ namespace RailroadTransport.Controllers
                     staffs = staffs.OrderByDescending(n => n.Post.NameOfPost);
                     break;
             }
-            staffs = staffs.Where(f => f.FIO.Contains(FIO ?? "")).Where(n => n.Post.NameOfPost.Contains(NameOfPost ?? "")); 
+            staffs = staffs.Where(f => f.FIO.Contains(FIO ?? "")).Where(n => n.Post.NameOfPost.Contains(NameOfPost ?? ""));
             if (Age > 0)
                 staffs = staffs.Where(a => a.Age == Age);
             if (WorkExp > 0)
                 staffs = staffs.Where(w => w.WorkExp == WorkExp);
+
             return staffs;
         }
         public IActionResult ClearCache()
@@ -128,9 +137,9 @@ namespace RailroadTransport.Controllers
             cache.Remove("staffViewModel");
             return RedirectToAction("Index");
         }
-        private StaffViewModel SetViewModel(string FIO, string NameOfPost, int Age, int WorkExp, SortState sortState, int page = 1)
+        private StaffViewModel SetViewModel(string FIO, string NameOfPost, int Age, int WorkExp, SortState sortState,int page = 1)
         {
-            IEnumerable<Staff> staffs = railroadContext.Staffs.Include(p => p.Post);
+            IEnumerable<Staff> staffs = railroadContext.Staffs.Include(p => p.Post).Include(t => t.Train).Include(t => t.Train.Schedules);
             staffs = SortSearch(staffs, Age, WorkExp, FIO ?? "", NameOfPost ?? "", sortState);
             int pageSize = 20;
             int count = staffs.Count();

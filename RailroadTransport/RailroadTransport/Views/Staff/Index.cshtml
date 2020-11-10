@@ -11,7 +11,8 @@
 <h2>Сотрудники</h2>
 
 <p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
-<p><a class="btn btn-outline-dark" asp-action="ClearCache">Очисть фильтр</a></p>
+<p><a class="btn btn-outline-dark" asp-action="ClearCache">Очистить фильтр</a></p>
+<p><a class="btn btn-outline-dark" asp-action="Index" asp-route-IsMachinist="true">Сотрудники машинисты</a></p>
 @using (Html.BeginForm("Index", "Staff", FormMethod.Get))
 {
     <fieldset>
@@ -19,9 +20,10 @@
         Наименование должности: @Html.TextBox("NameOfPost", @NameOfPost)
         Возраст сотрудника: @Html.TextBox("Age", @Age)
         <br><br>Стаж работы сотрудника: @Html.TextBox("WorkExp", @WorkExp)
-        <input type="submit" value="Найти" />
+        <input class="btn btn-outline-dark" type="submit" value="Найти" />
     </fieldset>
 }
+<br><br>
 
 <table class="table">
     <thead>

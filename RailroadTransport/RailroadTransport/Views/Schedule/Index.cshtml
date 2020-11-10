@@ -7,7 +7,23 @@
 <h2>Расписание</h2>
 @if (User.IsInRole("Admin"))
 {
-    <p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
+    @using (Html.BeginForm("Index", "Schedule", FormMethod.Get))
+    {
+        <fieldset>
+            Наименование остановки: @Html.TextBox("Stop", Model.Stop)
+            Начало интервала времени: @Html.TextBox("StartTime", Model.StartTime)
+            <br />
+            Конец интервала времени: @Html.TextBox("EndTime", Model.EndTime)
+            <input class="btn btn-outline-dark" type="submit" value="Посчитать количество" />
+            Количество поездов: @Html.DisplayFor(model => model.CountOfTrains)
+        </fieldset>
+    }
+    <br />
+    <fieldset>
+        Общее количество остановок: @Html.DisplayFor(model => model.CountOfStops)
+    </fieldset>
+    <br />
+<p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
 }
 <p><a class="btn btn-outline-dark" asp-action="ClearCache">Очистить фильтр</a></p>
 @using (Html.BeginForm("Index", "Schedule", FormMethod.Get))
@@ -15,9 +31,11 @@
     <fieldset>
         Наименование начальной остановки: @Html.TextBox("NameOfBeginStop", Model.NameOfBeginStop)
         Наименование конечной остановки: @Html.TextBox("NameOfEndStop", Model.NameOfEndStop)
-        <input type="submit" value="Найти" />
+        <input class="btn btn-outline-dark" type="submit" value="Найти" />
     </fieldset>
 }
+<br />
+<br />
 
 <table class="table">
     <thead>
