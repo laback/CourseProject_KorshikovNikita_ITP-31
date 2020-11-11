@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "e7PRwmw65qUeAoTvgXUjE0TpmMh7g2jFKH6EH7KIQmafeEacZXVyCzRdHtegrbKFfLZyxNwhx14pNcx3tY60QA==",
+  "dgSpecHash": "B1KmlEg5KI4gQ8N1vszoSi8U1i1Mye1xSTwFtqy7Q0VZwkUY1IF9z6qLAeWiXQVafqvgU2My/xICZcx5ViYzDg==",
   "success": true,
-  "projectFilePath": "D:\\Учёба\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
+  "projectFilePath": "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\korsh\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.0\\microsoft.aspnetcore.cryptography.internal.5.0.0.nupkg.sha512",
     "C:\\Users\\korsh\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.0\\microsoft.aspnetcore.cryptography.keyderivation.5.0.0.nupkg.sha512",
