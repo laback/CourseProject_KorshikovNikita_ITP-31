@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj": {}
+    "D:\\Учёба\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj": {}
   },
   "projects": {
-    "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj": {
+    "D:\\Учёба\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
+        "projectUniqueName": "D:\\Учёба\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
         "projectName": "RailroadTransport",
-        "projectPath": "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
+        "projectPath": "D:\\Учёба\\Курсач\\RailroadTransport\\RailroadTransport\\RailroadTransport.csproj",
         "packagesPath": "C:\\Users\\korsh\\.nuget\\packages\\",
-        "outputPath": "D:\\Учёба\\РПБДИС\\Курсач\\CourseProject_KorshikovNikita_ITP-31\\RailroadTransport\\RailroadTransport\\obj\\",
+        "outputPath": "D:\\Учёба\\Курсач\\RailroadTransport\\RailroadTransport\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\korsh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,21 +40,11 @@
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.8, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

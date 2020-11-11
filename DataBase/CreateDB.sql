@@ -1,5 +1,5 @@
-create database Course1
-go
+--create database Course1
+--go
 
 use Course1
 go
@@ -23,11 +23,11 @@ GO
 CREATE TABLE [Trains] (
   [trainId] int PRIMARY KEY identity(1,1),
   [typeId] int,
-  isFirm bit
+  [isFirm] bit
 )
 GO
 
-CREATE TABLE [Types] (
+CREATE TABLE [TypesOfTrains] (
   [typeId] int PRIMARY KEY identity(1,1),
   [nameOfType] varchar(30)
 )
@@ -36,17 +36,19 @@ GO
 CREATE TABLE [Schedules] (
   [scheduleId] int PRIMARY KEY identity(1,1),
   [trainId] int,
-  [day] varchar(10),
-  [beginStopId] int,
-  [endStopId] int,
+  [day] varchar(1),
+  [stopId] int,
   [distance] float,
+  [timeOfDeparture] time,
   [timeOfArrive] time
 )
 GO
 
 CREATE TABLE [Stops] (
   [stopId] int PRIMARY KEY identity(1,1),
-  [nameOfStop] varchar(30)
+  [nameOfStop] varchar(30),
+  [isStation] bit,
+  [isHall] bit
 )
 GO
 
@@ -56,14 +58,11 @@ GO
 ALTER TABLE [Staffs] ADD FOREIGN KEY ([postId]) REFERENCES [Posts] ([postId])
 GO
 
-ALTER TABLE [Trains] ADD FOREIGN KEY ([typeId]) REFERENCES [Types] ([typeId])
+ALTER TABLE [Trains] ADD FOREIGN KEY ([typeId]) REFERENCES [TypesOfTrains] ([typeId])
 GO
 
 ALTER TABLE [Schedules] ADD FOREIGN KEY ([trainId]) REFERENCES [Trains] ([trainId])
 GO
 
-ALTER TABLE [Schedules] ADD FOREIGN KEY ([beginStopId]) REFERENCES [Stops] ([stopId])
-GO
-
-ALTER TABLE [Schedules] ADD FOREIGN KEY ([endStopId]) REFERENCES [Stops] ([stopId])
+ALTER TABLE [Schedules] ADD FOREIGN KEY ([stopId]) REFERENCES [Stops] ([stopId])
 GO

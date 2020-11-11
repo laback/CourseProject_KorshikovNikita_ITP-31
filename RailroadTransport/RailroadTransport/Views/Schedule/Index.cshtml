@@ -26,27 +26,16 @@
 <p><a class="btn btn-outline-dark" asp-action="Create">Добавить</a></p>
 }
 <p><a class="btn btn-outline-dark" asp-action="ClearCache">Очистить фильтр</a></p>
-@using (Html.BeginForm("Index", "Schedule", FormMethod.Get))
-{
-    <fieldset>
-        Наименование начальной остановки: @Html.TextBox("NameOfBeginStop", Model.NameOfBeginStop)
-        Наименование конечной остановки: @Html.TextBox("NameOfEndStop", Model.NameOfEndStop)
-        <input class="btn btn-outline-dark" type="submit" value="Найти" />
-    </fieldset>
-}
-<br />
-<br />
-
 <table class="table">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().ScheduleId)</th>
             <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().TrainId)</th>
             <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().Day)</th>
-            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().BeginStop.NameOfStop)</th>
-            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().EndStop.NameOfStop)</th>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().Stop.NameOfStop)</th>
             <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().Distance)</th>
             <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().TimeOfArrive)</th>
+            <th>@Html.DisplayNameFor(model => model.Schedules.FirstOrDefault().TimeOfDeparture)</th>
         </tr>
     </thead>
     <tbody>
@@ -56,10 +45,10 @@
                 <td>@Html.DisplayFor(modelItem => item.ScheduleId)</td>
                 <td>@Html.DisplayFor(modelItem => item.TrainId)</td>
                 <td>@Html.DisplayFor(modelItem => item.Day)</td>
-                <td>@Html.DisplayFor(modelItem => item.BeginStop.NameOfStop)</td>
-                <td>@Html.DisplayFor(modelItem => item.EndStop.NameOfStop)</td>
+                <td>@Html.DisplayFor(modelItem => item.Stop.NameOfStop)</td>
                 <td>@Html.DisplayFor(modelItem => item.Distance)</td>
                 <td>@Html.DisplayFor(modelItem => item.TimeOfArrive)</td>
+                <td>@Html.DisplayFor(modelItem => item.TimeOfDeparture)</td>
                 @if (User.IsInRole("Admin"))
                 {
                     <td>

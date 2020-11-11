@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using RailroadTransport.Data;
-using RailroadTransport.Infrastructure;
 using RailroadTransport.Models;
 using RailroadTransport.ViewModels;
 
 namespace RailroadTransport.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class PostController : Controller
     {
         private RailroadContext railroadContext;
@@ -45,7 +46,7 @@ namespace RailroadTransport.Controllers
         [HttpPost]
         public IActionResult Create([Bind("PostId,NameOfPost")] Post post)
         {
-            if(!String.IsNullOrEmpty(post.NameOfPost))
+            if (!String.IsNullOrEmpty(post.NameOfPost))
             {
                 railroadContext.Posts.Add(post);
                 railroadContext.SaveChanges();
@@ -53,7 +54,6 @@ namespace RailroadTransport.Controllers
             }
             return View(post);
         }
-
         public IActionResult Edit(int? id)
         {
             var post = railroadContext.Posts.Find(id);

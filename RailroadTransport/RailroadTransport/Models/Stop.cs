@@ -13,7 +13,10 @@ namespace RailroadTransport.Models
         public int StopId { get; set; }
         [Display(Name = "Название остановки")]
         public string NameOfStop { get; set; }
-        public ICollection<Schedule> ScheduleBeginStop { get; set; }
-        public ICollection<Schedule> ScheduleEndStop { get; set; }
+        [Display(Name = "Является ли станцией")]
+        public bool IsStation { get; set; }
+        [Display(Name = "Имеется ли зал ожидания")]
+        public bool IsHall { get; set; }
+        public ICollection<Schedule> ScheduleStop { get; set; }
     }
 }

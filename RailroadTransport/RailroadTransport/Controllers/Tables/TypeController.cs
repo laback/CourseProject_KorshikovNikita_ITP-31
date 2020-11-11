@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RailroadTransport.Data;
 using RailroadTransport.Models;
 
 namespace RailroadTransport.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TypeController : Controller
     {
         private RailroadContext railroadContext;

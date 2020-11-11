@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RailroadTransport.Data;
-using RailroadTransport.Middleware;
 using RailroadTransport.Models;
 
 namespace RailroadTransport
@@ -28,16 +26,16 @@ namespace RailroadTransport
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<UserIdentityContext>(options => options.UseSqlServer(connection));
-            services.AddIdentity<User, IdentityRole>(opts =>
-            {
-                opts.Password.RequiredLength = 5; 
+            services.AddDbContext<UserIdentityContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, IdentityRole>(opts => {
+                opts.Password.RequiredLength = 5;
                 opts.Password.RequireNonAlphanumeric = false;
-                opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = false;
+                opts.Password.RequireLowercase = false;
                 opts.Password.RequireDigit = false;
-            })
+                })
                 .AddEntityFrameworkStores<UserIdentityContext>();
 
             string connection1 = Configuration.GetConnectionString("SqlServerConnection");
@@ -46,7 +44,7 @@ namespace RailroadTransport
             services.AddControllersWithViews();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RailroadContext rc)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -55,17 +53,15 @@ namespace RailroadTransport
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseCacheMiddleware();
-
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

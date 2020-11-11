@@ -1,13 +1,15 @@
 use Course1
 go
 
-create procedure FillTrains as
+alter procedure FillTrains as
 
-declare @count int, @type int, @isFirm int
+declare @count int, @type int, @isFirm int, @maxtype int, @mintype int
 set @count = 20000
+select @maxtype = max(typeId) from TypesOfTrains
+select @mintype = min(typeId) from TypesOfTrains
 while @count > 0
 	begin
-		set @type = Rand()*(4 - 1) + 1
+		set @type = Rand()*(@maxtype + 1 - @mintype) + @mintype
 		set @isFirm = Rand()*(2 - 0) + 0
 		insert into Trains values(@type, @isFirm)
 		set @count = @count - 1

@@ -11,14 +11,14 @@
     <dd>@Html.DisplayFor(model => model.ScheduleId)</dd>
     <dt>@Html.DisplayNameFor(model => model.TrainId)</dt>
     <dd>@Html.DisplayFor(model => model.TrainId)</dd>
-    <dt>@Html.DisplayNameFor(model => model.BeginStop.NameOfStop)</dt>
-    <dd>@Html.DisplayFor(model => model.BeginStop.NameOfStop)</dd>
-    <dt>@Html.DisplayNameFor(model => model.EndStop.NameOfStop)</dt>
-    <dd>@Html.DisplayFor(model => model.EndStop.NameOfStop)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Stop.NameOfStop)</dt>
+    <dd>@Html.DisplayFor(model => model.Stop.NameOfStop)</dd>
     <dt>@Html.DisplayNameFor(model => model.Distance)</dt>
     <dd>@Html.DisplayFor(model => model.Distance)</dd>
     <dt>@Html.DisplayNameFor(model => model.TimeOfArrive)</dt>
     <dd>@Html.DisplayFor(model => model.TimeOfArrive)</dd>
+    <dt>@Html.DisplayNameFor(model => model.TimeOfDeparture)</dt>
+    <dd>@Html.DisplayFor(model => model.TimeOfDeparture)</dd>
 </dl>
 <form asp-action="Delete">
     <input type="hidden" asp-for="ScheduleId" />

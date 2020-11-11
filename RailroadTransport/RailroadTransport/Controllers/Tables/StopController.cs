@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using RailroadTransport.Data;
@@ -10,6 +11,7 @@ using RailroadTransport.ViewModels;
 
 namespace RailroadTransport.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StopController : Controller
     {
         private RailroadContext railroadContext;
@@ -72,10 +74,8 @@ namespace RailroadTransport.Controllers
         public IActionResult DeleConfirmed(int id)
         {
             var stop = railroadContext.Stops.Find(id);
-            var beginStop = railroadContext.Schedules.Where(b => b.BeginStopId == id);
-            var endStop = railroadContext.Schedules.Where(b => b.EndStopId == id);
-            railroadContext.Schedules.RemoveRange(beginStop);
-            railroadContext.Schedules.RemoveRange(endStop);
+            var Stop = railroadContext.Schedules.Where(b => b.StopId == id);
+            railroadContext.Schedules.RemoveRange(Stop);
             railroadContext.Stops.Remove(stop);
             railroadContext.SaveChanges();
             return RedirectToAction("Index");
