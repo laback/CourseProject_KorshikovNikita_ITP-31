@@ -22,22 +22,38 @@ namespace RailroadTransport.Controllers
             railroadContext = rc;
             this.cache = cache;
         }
-        public IActionResult Index(string Stop, TimeSpan StartTime, TimeSpan EndTime, int page = 1)
+        public IActionResult Index(string Stop, TimeSpan StartTime, TimeSpan EndTime, bool IsSorted, int page = 1)
         {
             ScheduleViewModel viewModel;
-            if (!cache.TryGetValue("scheduleViewModel", out viewModel))
+            if(IsSorted)
             {
-                viewModel = SetViewModel(Stop, StartTime, EndTime, page);
-                cache.Set("scheduleViewModel", viewModel);
+                IEnumerable<Schedule> schedules = railroadContext.Schedules.OrderBy(t => t.TrainId).ThenBy(d => d.Distance).ThenByDescending(t => t.TimeOfArrive).Include(p => p.Stop); 
+                int pageSize = 20;
+                int count = schedules.Count();
+                schedules = schedules.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+                viewModel = new ScheduleViewModel()
+                {
+                    Schedules = schedules,
+                    PageViewModel = pageViewModel
+                };
             }
             else
             {
-                if (StartTime.TotalMilliseconds == 0 && viewModel.StartTime.TotalMilliseconds != 0)
-                    StartTime = viewModel.StartTime;
-                if (EndTime.TotalMilliseconds == 0 && viewModel.EndTime.TotalMilliseconds != 0)
-                    EndTime = viewModel.EndTime;
-                viewModel = SetViewModel(Stop ?? viewModel.Stop, StartTime, EndTime, page);
-                cache.Set("scheduleViewModel", viewModel);
+                if (!cache.TryGetValue("scheduleViewModel", out viewModel))
+                {
+                    viewModel = SetViewModel(Stop, StartTime, EndTime, page);
+                    cache.Set("scheduleViewModel", viewModel);
+                }
+                else
+                {
+                    if (StartTime.TotalMilliseconds == 0 && viewModel.StartTime.TotalMilliseconds != 0)
+                        StartTime = viewModel.StartTime;
+                    if (EndTime.TotalMilliseconds == 0 && viewModel.EndTime.TotalMilliseconds != 0)
+                        EndTime = viewModel.EndTime;
+                    viewModel = SetViewModel(Stop ?? viewModel.Stop, StartTime, EndTime, page);
+                    cache.Set("scheduleViewModel", viewModel);
+                }
             }
             return View(viewModel);
         }
@@ -119,7 +135,7 @@ namespace RailroadTransport.Controllers
                     schedules = railroadContext.Schedules.Include(b => b.Stop);
             }
             else
-                schedules = railroadContext.Schedules.Include(b => b.Stop); ;
+                schedules = railroadContext.Schedules.Include(b => b.Stop);
             schedules = SortSearch(schedules, Stop);
             int pageSize = 20;
             int count = schedules.Count();

@@ -125,7 +125,6 @@ D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\Rai
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\RailroadTransport.pdb
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\bin\Debug\netcoreapp3.1\appsettings.json
-D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\bin\Debug\netcoreapp3.1\RailroadTransport.exe
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\bin\Debug\netcoreapp3.1\RailroadTransport.deps.json
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\bin\Debug\netcoreapp3.1\RailroadTransport.runtimeconfig.json
@@ -230,3 +229,4 @@ D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\Rai
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\staticwebassets\RailroadTransport.StaticWebAssets.Manifest.cache
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\staticwebassets\RailroadTransport.StaticWebAssets.xml
 D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\RailroadTransport.genruntimeconfig.cache
+D:\Учёба\РПБДИС\Курсач\CourseProject_KorshikovNikita_ITP-31\RailroadTransport\RailroadTransport\obj\Debug\netcoreapp3.1\scopedcss\bundle\RailroadTransport.styles.css

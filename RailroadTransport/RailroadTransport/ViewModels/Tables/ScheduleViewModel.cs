@@ -16,5 +16,6 @@ namespace RailroadTransport.ViewModels
         public TimeSpan EndTime { get; set; }
         public int CountOfTrains { get; set; }
         public int CountOfStops { get; set; }
+        public bool IsSorted { get; set; }
     }
 }
